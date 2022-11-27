@@ -1,15 +1,31 @@
 import styled from "styled-components";
-import { useState} from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 
+import Product from "./components/Product";
+import {LoginContext} from "./contexts/AuthProvider.js";
 import carrinhoDeCompras from"./assets/carrinho.svg";
 import logo from"./assets/logo.svg";
-import roupa from "./assets/roupa.svg";
 import home from "./assets/home.svg"
 import logout from"./assets/logout.svg";
 
 
 export default function Home (){
+  const [products, setProducts]= useState([]);
+  const {token} = useContext(LoginContext);
+  
+  useEffect (()=>{
+    axios.get("http://localhost:5000/products", {
+      headers: {
+        Authorization: token
+      }
+    }).then(response=>{
+      setProducts(response.data);
+    }).catch((erro)=>{
+      console.log(erro);
+    })
+  }, []);
+
   return(<>
     <StyledContainer>
       <StyledHeader>
@@ -21,13 +37,20 @@ export default function Home (){
         </div>
       </StyledHeader>
       <StyledMain>
-        <div className="containershop">
-          <div className="roupa">
-            <img src={roupa} alt="roupa"></img>
-          </div>
-          <p className="descriçãoroupa">Calça Jogger</p>
-          <p className="preco">39,90</p>
-        </div>
+        {
+          products.map((product, index) => {
+            return (
+              <Product
+                key={index}
+                id={product._id}
+                name={product.name}
+                description={product.description}
+                price={product.price}
+                img={product.img}
+              />
+            )
+          })
+        }
       </StyledMain>
       <Styledfooter>
         <div className="logo">
@@ -65,24 +88,24 @@ padding: 30px 40px;
 align-items: center;
 justify-content:space-between;
 flex-wrap: wrap;
-
-
   .containershop{
-    width: 117;
+    text-decoration: none;
+    width: 117px;
     height: 145px;
     margin-bottom: 70px;
-    img{
-      width: 100%;
-    }
-    .descriçãoroupa{
+  img{
+    width: 100%;
+  }
+  .name-item{
+    color: #000;
     font-size: 12px;
     margin-bottom: 4px;
-    }
+  }
   .preco{
     color:#F45C1E;
-    font-size:16;
-    }
+    font-size:16px;
   }
+}
   
 `
 

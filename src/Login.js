@@ -1,15 +1,17 @@
 import styled from "styled-components";
 import { useState, useContext } from "react";
-import { LoginContext } from "./auth";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { LoginContext } from "./contexts/AuthProvider.js";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {setToken} = useContext(LoginContext)
+    const {setToken, setLogado} = useContext(LoginContext)
     const navigate = useNavigate();
+
 
     function login(event){
         event.preventDefault();
@@ -19,88 +21,96 @@ export default function Login(){
         })
         requisicao.then(response => {
             setToken(response.data.token);
-            navigate('/home');
-            console.log(response.data)
+            setLogado(true);
+            navigate("/home");
+        })
+        requisicao.catch(err => {
+            alert("Usuario e senha invalidos")
         })
     }
+
     return (
         <>
             <Header>
-                <img src="carrinho.png" alt="carrinho" />
+                <div className="logo-wrapper">
+                    <div className="logo">
+                        <img src="carrinho.png" alt="carrinho" />
+                    </div>
+                </div>
                 <p>Login</p>
             </Header>
             <Signin onSubmit={login}>
-                <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}></input>
-                <input type="password" placeholder="senha" value={password} onChange={e => setPassword(e.target.value)}></input>
-
+                <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}></input>
+                <input type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)}></input>
+                <Link to="/sign-up" className="register">Cadastrar-se</Link>
                 <button type="submit">LOGIN</button>
             </Signin>
         </>
     )
 }
 const Header = styled.div`
-    width: 100%;
     height: 389px;
-    left: 0px;
-    top: 0px;
     background: linear-gradient(180deg, #F35B1C 0%, #F45C1E 33.33%, #F3731D 66.67%, #F4841E 100%);
     border-radius: 0px 0px 0px 100px;
-    img{
-        margin-left:146.63px;
-        margin-top:126.34px;
-        position:relative;
-        z-index:1;
-        align-items:center;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    .logo-wrapper{
+        flex-grow: 8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .logo{
+            width: 122px;
+            height: 121px;
+        }
+        img{
+            width: 100%;
+        }
     }
     p{
-        margin-top:89.34px;
-        text-align:right;
-        margin-right:43px;
-        color:#FFFFFF;
+        flex-grow: 2;
+        font-family: 'Roboto';
+        font-weight: 400;
         font-size: 26px;
-
+        line-height: 30px;
+        color:#fff;
+        text-align: right;
     }
 `
 const Signin = styled.form`
     display:flex;
     flex-direction:column;
     justify-content:center;
-    align-items:center;
     margin-top:74px;
-    input:nth-child(1){
-        width: 303px;
+    padding: 0 50px;
+    input{
         height: 48px;  
         border-radius: 5px;
         border:none;
         border: 1px solid rgba(0, 0, 0, 0.13);
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
+        margin-bottom: 36px;
+        padding-left: 22px;
+        font-size: 18px;
     }
     input:nth-child(2){
-        width: 303px;
-        height: 48px;
-        border-radius: 5px;
-        border:none;
-        margin-top:36px;
-        border: 1px solid rgba(0, 0, 0, 0.13);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
+        margin-bottom: 0;
     }
-    input:nth-child(3){
-        width: 303px;
-        height: 48px;  
-        border-radius: 5px;
-        border:none;
-        margin-top:36px;
-        border: 1px solid rgba(0, 0, 0, 0.13);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
+    .register {
+        margin-top: 20px;
+        color: #4E4949;
+        text-decoration: none;
+        text-align: right;
+        padding-right: 5px;
+        font-size: 16px;
     }
     button{
         color:#FFFFFF;
         background: linear-gradient(270deg, #F45C1E 0%, #F3711C 47%, #F3821E 97.03%);        
         border:none;
-        width: 303px;
         height: 48px;
         margin-top:36px;
         font-size: 20px;

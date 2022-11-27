@@ -1,27 +1,28 @@
+import { useContext } from 'react';
 import './styles.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Cadastro from './Cadastro';
 import Home from './Home';
-import Product from './Product';
+import ViewProduct from './ViewProduct';
 import Carrinho from './Carrinho';
-import {AuthProvider} from "./auth"
+import { LoginContext } from './contexts/AuthProvider.js';
 
+const PrivateRoute = ({ Component }) => {
+  const {logado} = useContext(LoginContext);
+
+  return logado ? <Component /> : <Login />
+}
 
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />}/>
-          <Route path="/sign-up" element={<Cadastro />}/>
-          <Route path="/home" element={<Home />}/>
-          <Route path="/product" element={<Product />}/>
-          <Route path="/carrinho" element={<Carrinho />}/>
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
-
+    <Routes>
+      <Route path="/" element={<Login />}/>
+      <Route path="/sign-up" element={<Cadastro />}/>
+      <Route path="/home" element={<PrivateRoute Component={Home}/>}/>
+      <Route path="/product" element={<PrivateRoute Component={ViewProduct}/>}/>
+      <Route path="/carrinho" element={<PrivateRoute Component={Carrinho}/>}/>
+    </Routes>
   );
 }
 

@@ -33,8 +33,12 @@ export default function Cadastro() {
     return (
         <>
             <Header>
-                <img src="carrinho.png" alt="carrinho" />
-                <p>Register</p>
+                <div className="logo-wrapper">
+                    <div className="logo">
+                        <img src="carrinho.png" alt="carrinho" />
+                    </div>
+                </div>
+                <p>Login</p>
             </Header>
             <Signup onSubmit={cadastrar}>
                 <input type="text" placeholder="Nome" value={name} onChange={e => setName(e.target.value)}></input>
@@ -46,63 +50,53 @@ export default function Cadastro() {
     )
 }
 const Header = styled.div`
-    width: 100%;
     height: 389px;
-    left: 0px;
-    top: 0px;
     background: linear-gradient(180deg, #F35B1C 0%, #F45C1E 33.33%, #F3731D 66.67%, #F4841E 100%);
     border-radius: 0px 0px 0px 100px;
-    img{
-        margin-left:146.63px;
-        margin-top:126.34px;
-        position:relative;
-        z-index:1;
-        align-items:center;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    .logo-wrapper{
+        flex-grow: 8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .logo{
+            width: 122px;
+            height: 121px;
+        }
+        img{
+            width: 100%;
+        }
     }
     p{
-        margin-top:89.34px;
-        text-align:right;
-        margin-right:43px;
-        color:#FFFFFF;
+        flex-grow: 2;
+        font-family: 'Roboto';
+        font-weight: 400;
         font-size: 26px;
-
+        line-height: 30px;
+        color:#fff;
+        text-align: right;
     }
-   
 `
+
 const Signup = styled.form`
     display:flex;
     flex-direction:column;
     justify-content:center;
-    align-items:center;
     margin-top:74px;
-    input:nth-child(1){
-        width: 303px;
+    padding: 0 50px;
+    input{
         height: 48px;  
         border-radius: 5px;
         border:none;
         border: 1px solid rgba(0, 0, 0, 0.13);
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
-    }
-    input:nth-child(2){
-        width: 303px;
-        height: 48px;
-        border-radius: 5px;
-        border:none;
-        margin-top:36px;
-        border: 1px solid rgba(0, 0, 0, 0.13);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
-    }
-    input:nth-child(3){
-        width: 303px;
-        height: 48px;  
-        border-radius: 5px;
-        border:none;
-        margin-top:36px;
-        border: 1px solid rgba(0, 0, 0, 0.13);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
+        margin-bottom: 36px;
+        padding-left: 22px;
+        font-size: 18px;
     }
     button{
         color:#FFFFFF;

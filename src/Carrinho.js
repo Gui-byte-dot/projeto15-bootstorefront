@@ -1,20 +1,23 @@
+import styled from "styled-components";
+import { useState} from "react";
+import axios from "axios";
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import carrinhoDeCompras from"./assets/carrinho.svg";
 import seta from"./assets/seta.svg";
 import roupa from "./assets/roupa.svg";
 import home from "./assets/home.svg"
 import logout from"./assets/logout.svg";
 
-import styled from "styled-components";
-import { useState} from "react";
-import axios from "axios";
-import { Link } from 'react-router-dom';
-
 export default function Carrinho (){
+  const navigate = useNavigate();
+
   return(<>
     <StyledContainer>
       <StyledHeader>
-        <div className="logo">
-          <img src={seta} alt="logo" />
+        <div className="seta" onClick={() => navigate(-1)}>
+          <img src={seta} alt="seta" />
         </div>
         <div className="carrinho">
           <img src={carrinhoDeCompras} alt="carrinho de compras" />
@@ -60,7 +63,7 @@ justify-content: space-between;
 padding: 20px;
 background-color: #FC300A;
 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-  .logo, .carrinho{
+  .seta, .carrinho{
     width: 33px;
     height: 35px;
     img{
