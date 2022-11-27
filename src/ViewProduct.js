@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useState} from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import carrinhoDeCompras from"./assets/carrinho.svg";
 import logo from"./assets/logo.svg";
@@ -9,8 +9,18 @@ import roupa from "./assets/roupa.png";
 import home from "./assets/home.svg"
 import logout from"./assets/logout.svg";
 
+const currencyBRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
 
 export default function ViewProduct (){
+  const location = useLocation();
+  const {
+    id,
+    name,
+    price,
+    description,
+    img,
+  } = location.state;
+
   return(<>
    <StyledContainer>
       <StyledHeader>
@@ -24,10 +34,11 @@ export default function ViewProduct (){
       <StyledMain>
         <div className="containershop">
           <div className="roupa">
-            <img src={roupa} alt="roupa"></img>
+            <img src={img} alt="roupa"></img>
           </div>
-          <p className="descriçãoroupa">Calça Jogger</p>
-          <p className="preco">39,90</p>
+          <p className="name">{name}</p>
+          <p className="preco">{currencyBRL.format(price)}</p>
+          <p>{description}</p>
         </div>
       </StyledMain>
       <StyledButtons>
@@ -81,7 +92,7 @@ flex-wrap: wrap;
       width: 100%;
     }
   }
-  .descriçãoroupa{
+  .name{
     margin-top: 40px;
     font-size: 32px;
     margin-bottom: 4px;
