@@ -5,10 +5,10 @@ import home from "./assets/home-grad.svg"
 
 const MySwal = withReactContent(Swal)
 
-export default function Alert({ goToCart, setModal }){
+export default function Alert({ text, executeFunction, setModal }){
   useEffect(()=>{
     MySwal.fire({
-      text: "Deseja adicionar esse produto ao carrinho ?",
+      text: text,
       imageUrl: home,
       imageWidth: 68,
       imageHeight: 65.5,
@@ -20,7 +20,7 @@ export default function Alert({ goToCart, setModal }){
       allowOutsideClick: false,
     }).then(response => {
       if(response.isConfirmed) {
-        goToCart();
+        executeFunction();
       }else {
         setModal(false);
       }

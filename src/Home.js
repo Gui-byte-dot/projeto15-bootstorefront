@@ -4,10 +4,7 @@ import axios from "axios";
 
 import Product from "./components/Product";
 import {LoginContext} from "./contexts/AuthProvider.js";
-import carrinhoDeCompras from"./assets/carrinho.svg";
-import logo from"./assets/logo.svg";
-import home from "./assets/home.svg"
-import logout from"./assets/logout.svg";
+import Container from "./components/Container";
 
 
 export default function Home (){
@@ -27,15 +24,8 @@ export default function Home (){
   }, []);
 
   return(<>
-    <StyledContainer>
-      <StyledHeader>
-        <div className="logo">
-          <img src={logo} alt="logo" />
-        </div>
-        <div className="carrinho">
-          <img src={carrinhoDeCompras} alt="carrinho de compras" />
-        </div>
-      </StyledHeader>
+    <>
+      <Container>
       <StyledMain>
         {
           products.map((product, index) => {
@@ -52,36 +42,11 @@ export default function Home (){
           })
         }
       </StyledMain>
-      <Styledfooter>
-        <div className="logo">
-          <img src={home} alt="logo" />
-        </div>
-        <div className="carrinho">
-          <img src={logout} alt="carrinho de compras" />
-        </div>
-      </Styledfooter>
-    </StyledContainer>
+      </Container>
+    </>
   </>);
 }
 
-const StyledContainer= styled.div`
-font-family: 'Roboto', sans-serif;
-`
-const StyledHeader = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 20px;
-background-color: #FC300A;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-  .logo, .carrinho{
-    width: 33px;
-    height: 35px;
-    img{
-      width: 100%;
-    }
-  }
-`
 const StyledMain = styled.div`
 display:flex;
 padding: 30px 40px;
@@ -107,24 +72,4 @@ flex-wrap: wrap;
   }
 }
   
-`
-
-const Styledfooter = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 20px;
-background-color: #FC300A;
-background: linear-gradient(270deg, #F45C1E 0%, #F3711C 47%, #F3821E 97.03%);    
-position:fixed;
-bottom: 0;
-width: 100%;
-
-  .logo, .carrinho{
-    width: 33px;
-    height: 35px;
-    img{
-      width: 100%;
-    }
-  }
 `
