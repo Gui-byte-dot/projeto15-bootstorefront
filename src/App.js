@@ -6,14 +6,10 @@ import Cadastro from './Cadastro';
 import Home from './Home';
 import ViewProduct from './ViewProduct';
 import Carrinho from './Carrinho';
-<<<<<<< HEAD
 import { LoginContext } from './contexts/AuthProvider.js';
 
 const PrivateRoute = ({ Component }) => {
   const {logado} = useContext(LoginContext);
-=======
-import {AuthProvider} from "./auth"
->>>>>>> 5aee6f10ee0c9070bc873c6836f96b4e7450ec12
 
   return logado ? <Component /> : <Login />
 }
