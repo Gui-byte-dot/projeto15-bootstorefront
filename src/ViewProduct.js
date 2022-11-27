@@ -10,7 +10,7 @@ import home from "./assets/home.svg"
 import logout from"./assets/logout.svg";
 
 
-export default function Product (){
+export default function ViewProduct (){
   return(<>
    <StyledContainer>
       <StyledHeader>
