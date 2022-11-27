@@ -93,7 +93,10 @@ justify-content: space-between;
 padding: 20px;
 background-color: #FC300A;
 background: linear-gradient(270deg, #F45C1E 0%, #F3711C 47%, #F3821E 97.03%);    
-bottom: 0; 
+position:fixed;
+bottom: 0;
+width: 100%;
+
   .logo, .carrinho{
     width: 33px;
     height: 35px;

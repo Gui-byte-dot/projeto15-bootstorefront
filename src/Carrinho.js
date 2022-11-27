@@ -1,37 +1,38 @@
-import styled from "styled-components"
+import carrinhoDeCompras from"./assets/carrinho.svg";
+import seta from"./assets/seta.svg";
+import roupa from "./assets/roupa.svg";
+import home from "./assets/home.svg"
+import logout from"./assets/logout.svg";
+
+import styled from "styled-components";
 import { useState} from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-import carrinhoDeCompras from"./assets/carrinho.svg";
-import logo from"./assets/logo.svg";
-import roupa from "./assets/roupa.png";
-import home from "./assets/home.svg"
-import logout from"./assets/logout.svg";
-
-
-export default function Product (){
+export default function Carrinho (){
   return(<>
-   <StyledContainer>
+    <StyledContainer>
       <StyledHeader>
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <img src={seta} alt="logo" />
         </div>
         <div className="carrinho">
           <img src={carrinhoDeCompras} alt="carrinho de compras" />
         </div>
       </StyledHeader>
       <StyledMain>
-        <div className="containershop">
+        <StyleCardProduct>
+          <div className="descricoesproduto">
+            <p className="descriçãoroupa">Calça Jogger</p>
+            <p className="preco">39,90</p>
+          </div>
           <div className="roupa">
             <img src={roupa} alt="roupa"></img>
           </div>
-          <p className="descriçãoroupa">Calça Jogger</p>
-          <p className="preco">39,90</p>
-        </div>
+        </StyleCardProduct>
       </StyledMain>
       <StyledButtons>
-        <Link to="/carrinho" className="link">
+        <Link>
           <button>Colocar no carrinho</button>
         </Link>
       </StyledButtons>
@@ -47,8 +48,10 @@ export default function Product (){
   </>)
 }
 
+
 const StyledContainer= styled.div`
 font-family: 'Roboto', sans-serif;
+
 `
 const StyledHeader = styled.div`
 display: flex;
@@ -69,27 +72,38 @@ const StyledMain = styled.div`
 display:flex;
 padding: 30px 40px;
 align-items: center;
+flex-direction: column;
+`
+const StyleCardProduct = styled.div`
+background-color: #f8f8;
+display: flex;
+width: 100%;
+border-radius:5px;
+flex-direction: row;
+margin-bottom: 20px;
 justify-content:space-between;
-flex-wrap: wrap;
+padding: 10px;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 
+  .roupa{
+    width: 83px;
+    height: 101px;
 
-  .containershop{
-    margin-bottom: 70px;
-    width: 331;
-    height: 400px;
     img{
-      width: 100%;
+    width: 100%;
+  }
+  }
+
+  .descricoesproduto{
+    .descriçãoroupa{
+      font-size: 24px;
+      margin-bottom: 50px;
+    }
+    .preco{
+      color:#F45C1E;
+      font-size:22px;
     }
   }
-  .descriçãoroupa{
-    margin-top: 40px;
-    font-size: 32px;
-    margin-bottom: 4px;
-    }
-  .preco{
-    color:#F45C1E;
-    font-size: 32px;
-    }
   
 `
 const StyledButtons= styled.div`
@@ -112,10 +126,11 @@ border-radius: 20px;
 `
 const Styledfooter = styled.div`
 display: flex;
+align-items: center;
 justify-content: space-between;
 padding: 20px;
 background-color: #FC300A;
-background: linear-gradient(270deg, #F45C1E 0%, #F3711C 47%, #F3821E 97.03%);  
+background: linear-gradient(270deg, #F45C1E 0%, #F3711C 47%, #F3821E 97.03%);    
 position:fixed;
 bottom: 0;
 width: 100%;
