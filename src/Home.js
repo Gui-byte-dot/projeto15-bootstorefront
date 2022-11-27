@@ -42,9 +42,11 @@ export default function Home (){
             return (
               <Product
                 key={index}
+                id={product._id}
                 name={product.name}
                 description={product.description}
                 price={product.price}
+                img={product.img}
               />
             )
           })
@@ -87,21 +89,23 @@ align-items: center;
 justify-content:space-between;
 flex-wrap: wrap;
   .containershop{
-    width: 117;
+    text-decoration: none;
+    width: 117px;
     height: 145px;
     margin-bottom: 70px;
-    img{
-      width: 100%;
-    }
-    .description-item{
+  img{
+    width: 100%;
+  }
+  .name-item{
+    color: #000;
     font-size: 12px;
     margin-bottom: 4px;
   }
   .preco{
     color:#F45C1E;
-    font-size:16;
-    }
+    font-size:16px;
   }
+}
   
 `
 
