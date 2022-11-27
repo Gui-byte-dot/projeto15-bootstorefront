@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { LoginContext } from "./contexts/AuthProvider.js";
 
@@ -9,6 +10,7 @@ export default function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {setToken, setLogado} = useContext(LoginContext)
+    const navigate = useNavigate();
 
 
     function login(event){
@@ -20,7 +22,10 @@ export default function Login(){
         requisicao.then(response => {
             setToken(response.data.token);
             setLogado(true);
-            console.log(response.data)
+            navigate("/home");
+        })
+        requisicao.catch(err => {
+            alert("Usuario e senha invalidos")
         })
     }
 
