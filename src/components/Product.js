@@ -1,4 +1,4 @@
-export default function Clothes({ name, description, price, img }) {
+export default function Product({ name, description, price, img }) {
   return (
     <div className="containershop">
       <div className="img-item">
