@@ -20,7 +20,7 @@ export default function App() {
       <Route path="/" element={<Login />}/>
       <Route path="/sign-up" element={<Cadastro />}/>
       <Route path="/home" element={<PrivateRoute Component={Home}/>}/>
-      <Route path="/product/:id" element={<PrivateRoute Component={ViewProduct}/>}/>
+      <Route path="/product" element={<PrivateRoute Component={ViewProduct}/>}/>
       <Route path="/carrinho" element={<PrivateRoute Component={Carrinho}/>}/>
     </Routes>
   );
