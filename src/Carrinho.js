@@ -9,8 +9,8 @@ import Alert from './Alert.js';
 
 import carrinhoDeCompras from"./assets/carrinho.svg";
 import seta from"./assets/seta.svg";
-import home from "./assets/home.svg"
 import logout from"./assets/logout.svg";
+import Container from "./components/Container.js";
 
 export default function Carrinho (){
   const navigate = useNavigate();
@@ -49,65 +49,31 @@ export default function Carrinho (){
 
   
   return(<>
-    <StyledContainer>
+    <>
       {
         openModal ? (
-          <Alert text={"Deseja finalizar a compra ?"} img={home} executeFunction={purchase} setModal={setModal} />
+          <Alert text={"Deseja finalizar a compra ?"} executeFunction={purchase} setModal={setModal} />
         ): <></>
       }
-      <StyledHeader>
-        <div className="seta" onClick={() => navigate(-1)}>
-          <img src={seta} alt="seta" />
-        </div>
-        <div className="carrinho">
-          <img src={carrinhoDeCompras} alt="carrinho de compras" />
-        </div>
-      </StyledHeader>
-      <StyledMain>
-        {
-          productsCart.map((product, index) => {
-            return (
-              <StyleCardProduct key={index}>
-                <ProductCart name={product.name} price={product.price} img={product.img}/>
-              </StyleCardProduct>
-            )
-          })
-        }
-        <button onClick={() => confirmPurchase()}>Finalizar Pedido</button>
-        <Link to="/home" className="button">Continuar Comprando</Link>
-      </StyledMain>
-      <Styledfooter>
-        <div className="logo">
-          <img src={home} alt="logo" />
-        </div>
-        <div className="carrinho">
-          <img src={logout} alt="carrinho de compras" />
-        </div>
-      </Styledfooter>
-    </StyledContainer>
+      <Container isNotHome>
+        <StyledMain>
+          {
+            productsCart.map((product, index) => {
+              return (
+                <StyleCardProduct key={index}>
+                  <ProductCart name={product.name} price={product.price} img={product.img}/>
+                </StyleCardProduct>
+              )
+            })
+          }
+          <button onClick={() => confirmPurchase()}>Finalizar Pedido</button>
+          <Link to="/home" className="button">Continuar Comprando</Link>
+        </StyledMain>
+      </Container>
+    </>
   </>)
 }
 
-
-const StyledContainer= styled.div`
-font-family: 'Roboto', sans-serif;
-
-`
-const StyledHeader = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 20px;
-background-color: #FC300A;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-  .seta, .carrinho{
-    width: 33px;
-    height: 35px;
-    img{
-      width: 100%;
-    }
-  }
-`
 const StyledMain = styled.div`
 display:flex;
 padding: 30px 40px;
@@ -162,22 +128,4 @@ box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
     }
   }
   
-`
-const Styledfooter = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 20px;
-background-color: #FC300A;
-background: linear-gradient(270deg, #F45C1E 0%, #F3711C 47%, #F3821E 97.03%);    
-position:fixed;
-bottom: 0;
-width: 100%;
-  .logo, .carrinho{
-    width: 33px;
-    height: 35px;
-    img{
-      width: 100%;
-    }
-  }
 `
