@@ -48,7 +48,7 @@ export default function ViewProduct (){
    <StyledContainer>
       {
         openModal ? (
-          <Alert img={home} goToCart={goToCart} setModal={setModal} />
+          <Alert img={home} text={"Deseja adicionar esse produto ao carrinho ?"} executeFunction={goToCart} setModal={setModal} />
         ): <></>
       }
       <StyledHeader>
