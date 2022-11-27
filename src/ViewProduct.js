@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {useContext, useState} from "react";
 import {LoginContext} from "./contexts/AuthProvider.js";
@@ -71,9 +71,11 @@ export default function ViewProduct (){
         <button onClick={() => confirmProductCart()} className="link">Colocar no carrinho</button>
       </StyledMain>
       <Styledfooter>
-        <div className="logo">
-          <img src={home} alt="logo" />
-        </div>
+        <Link to='/home'>
+          <div className="logo">
+            <img src={home} alt="logo" />
+          </div>
+        </Link>
         <div className="carrinho">
           <img src={logout} alt="carrinho de compras" />
         </div>

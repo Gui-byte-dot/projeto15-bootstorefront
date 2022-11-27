@@ -40,9 +40,11 @@ export default function Carrinho (){
         </Link>
       </StyledButtons>
       <Styledfooter>
+      <Link to="/home">
         <div className="logo">
           <img src={home} alt="logo" />
         </div>
+      </Link>
         <div className="carrinho">
           <img src={logout} alt="carrinho de compras" />
         </div>
