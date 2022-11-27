@@ -5,7 +5,6 @@ import Cadastro from './Cadastro';
 import Home from './Home';
 import Product from './Product';
 import Carrinho from './Carrinho';
-
 import {AuthProvider} from "./auth"
 
 

@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import { LoginContext } from "./auth";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {setToken} = useContext(LoginContext)
-
+    const navigate = useNavigate();
 
     function login(event){
         event.preventDefault();
@@ -18,6 +19,7 @@ export default function Login(){
         })
         requisicao.then(response => {
             setToken(response.data.token);
+            navigate('/home');
             console.log(response.data)
         })
     }
@@ -30,6 +32,7 @@ export default function Login(){
             <Signin onSubmit={login}>
                 <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}></input>
                 <input type="password" placeholder="senha" value={password} onChange={e => setPassword(e.target.value)}></input>
+
                 <button type="submit">LOGIN</button>
             </Signin>
         </>
