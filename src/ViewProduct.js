@@ -1,5 +1,10 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import {useContext, useState} from "react";
+import {LoginContext} from "./contexts/AuthProvider.js";
+import Alert from './Alert.js';
+
 
 import carrinhoDeCompras from"./assets/carrinho.svg";
 import home from "./assets/home.svg"
@@ -7,8 +12,9 @@ import logout from"./assets/logout.svg";
 import seta from"./assets/seta.svg";
 
 const currencyBRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
-
 export default function ViewProduct (){
+  const {token}=useContext(LoginContext)
+  const [openModal, setModal]= useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -18,13 +24,33 @@ export default function ViewProduct (){
     description,
     img,
   } = location.state;
+  
+  function confirmProductCart() {
+    setModal(true)
+  }
 
   function goToCart() {
-    navigate("/carrinho")
+    axios.post("http://localhost:5000/cart",{
+      id,
+      name,
+      price,
+      description,
+      img,
+    } ,{headers:{Authorization:token}}).then(response => {
+      navigate("/carrinho")
+    }).catch((err) => {
+      console.log(err)
+    })
+
   }
 
   return(<>
    <StyledContainer>
+      {
+        openModal ? (
+          <Alert img={home} goToCart={goToCart} setModal={setModal} />
+        ): <></>
+      }
       <StyledHeader>
         <div className="seta" onClick={() => navigate(-1)}>
           <img src={seta} alt="seta" />
@@ -42,7 +68,7 @@ export default function ViewProduct (){
           <p className="preco">{currencyBRL.format(price)}</p>
           <p>{description}</p>
         </div>
-        <button onClick={() => goToCart()} className="link">Colocar no carrinho</button>
+        <button onClick={() => confirmProductCart()} className="link">Colocar no carrinho</button>
       </StyledMain>
       <Styledfooter>
         <div className="logo">
