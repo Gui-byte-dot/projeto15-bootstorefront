@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Cadastro from './Cadastro';
 import Home from './Home';
-import Product from './Product';
+import ViewProduct from './ViewProduct';
 import Carrinho from './Carrinho';
 import { LoginContext } from './contexts/AuthProvider.js';
 
@@ -20,7 +20,7 @@ export default function App() {
       <Route path="/" element={<Login />}/>
       <Route path="/sign-up" element={<Cadastro />}/>
       <Route path="/home" element={<PrivateRoute Component={Home}/>}/>
-      <Route path="/product" element={<PrivateRoute Component={Product}/>}/>
+      <Route path="/product/:id" element={<PrivateRoute Component={ViewProduct}/>}/>
       <Route path="/carrinho" element={<PrivateRoute Component={Carrinho}/>}/>
     </Routes>
   );
