@@ -13,9 +13,11 @@ export default function Carrinho (){
   return(<>
     <StyledContainer>
       <StyledHeader>
-        <div className="logo">
-          <img src={seta} alt="logo" />
-        </div>
+        <Link to="/home">
+          <div className="seta">
+          <img src={seta} alt="seta" />
+          </div>
+        </Link>
         <div className="carrinho">
           <img src={carrinhoDeCompras} alt="carrinho de compras" />
         </div>
@@ -60,7 +62,7 @@ justify-content: space-between;
 padding: 20px;
 background-color: #FC300A;
 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-  .logo, .carrinho{
+  .seta, .carrinho{
     width: 33px;
     height: 35px;
     img{
