@@ -1,18 +1,31 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-
+import {LoginContext} from "../contexts/AuthProvider.js";
 import carrinhoDeCompras from"../assets/carrinho.svg";
 import logo from"../assets/logo.svg";
 import home from "../assets/home.svg"
 import logoutIcon from"../assets/logout.svg";
 import seta from"../assets/seta.svg";
+import axios from "axios";
 
 
 export default function Container({ children, isNotHome=false }) {
   const navigate = useNavigate();
+  const {token} = useContext(LoginContext);
   
   function logout() {
-    /// FAzer aqui o logout
+    axios.post("http://localhost:5000/logout",[],{
+      headers:{
+        Authorization: token
+      }
+    }).then(response => {
+      localStorage.clear();
+      navigate('/');
+      console.log("Usuário saiu com sucesso");
+    }).catch((err) => {
+      console.log(err);
+    })
   }
 
   return (
