@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {useContext, useState} from "react";
-import home from "./assets/home.svg"
 
 import {LoginContext} from "./contexts/AuthProvider.js";
 import Alert from './Alert.js';

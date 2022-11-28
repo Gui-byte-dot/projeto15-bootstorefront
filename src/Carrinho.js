@@ -7,9 +7,6 @@ import {LoginContext} from "./contexts/AuthProvider.js";
 import ProductCart from "./components/ProductCart.js";
 import Alert from './Alert.js';
 
-import carrinhoDeCompras from"./assets/carrinho.svg";
-import seta from"./assets/seta.svg";
-import logout from"./assets/logout.svg";
 import Container from "./components/Container.js";
 
 export default function Carrinho (){
@@ -49,40 +46,26 @@ export default function Carrinho (){
 
   
   return(<>
-    <StyledContainer>
-      <StyledHeader>
-        <div className="seta" onClick={() => navigate(-1)}>
-          <img src={seta} alt="seta" />
-        </div>
-        <div className="carrinho">
-          <img src={carrinhoDeCompras} alt="carrinho de compras" />
-        </div>
-      </StyledHeader>
+    {
+        openModal ? (
+          <Alert text={"Deseja finalizar a compra ?"} executeFunction={purchase} setModal={setModal} />
+        ): <></>
+      }
+    <Container isNotHome>
       <StyledMain>
-        <StyleCardProduct>
-          <div className="descricoesproduto">
-            <p className="descriçãoroupa">Calça Jogger</p>
-            <p className="preco">39,90</p>
-          </div>
-          <div className="roupa">
-            <img src={roupa} alt="roupa"></img>
-          </div>
-        </StyleCardProduct>
+        {
+          productsCart.map((product, index) => {
+            return (
+              <StyleCardProduct key={index}>
+                <ProductCart name={product.name} price={product.price} img={product.img}/>
+              </StyleCardProduct>
+            )
+          })
+        }
+        <button onClick={() => confirmPurchase()}>Finalizar Pedido</button>
+        <Link to="/home" className="button">Continuar Comprando</Link>
       </StyledMain>
-      <StyledButtons>
-        <Link>
-          <button>Colocar no carrinho</button>
-        </Link>
-      </StyledButtons>
-      <Styledfooter>
-        <div className="logo">
-          <img src={home} alt="logo" />
-        </div>
-        <div className="carrinho">
-          <img src={logout} alt="carrinho de compras" />
-        </div>
-      </Styledfooter>
-    </StyledContainer>
+    </Container>
   </>)
 }
 
