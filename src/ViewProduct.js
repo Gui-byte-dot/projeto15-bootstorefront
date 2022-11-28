@@ -35,6 +35,9 @@ export default function ViewProduct (){
     } ,{headers:{Authorization:token}}).then(response => {
       navigate("/carrinho")
     }).catch((err) => {
+      if(err?.response?.status === 400) {
+        alert("Produto já esta no carrinho");
+      }
       console.log(err)
     })
 

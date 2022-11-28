@@ -14,6 +14,7 @@ export default function Carrinho (){
   const {token} = useContext(LoginContext);
   const [productsCart, setProducts]= useState([])
   const [openModal, setModal]= useState(false);
+  const [enabledFinish, setEnabledFinish] = useState(false);
 
 
   useEffect (() => {
@@ -22,7 +23,11 @@ export default function Carrinho (){
         Authorization: token
       }
     }).then(response=>{
-      setProducts(response.data)
+      const products = response.data;
+      setProducts(products)
+      if(products?.length > 0) {
+        setEnabledFinish(true)
+      }
     }).catch((erro)=>{
       alert("erro ao obter lista do carrinho")
     })
@@ -62,7 +67,7 @@ export default function Carrinho (){
             )
           })
         }
-        <button onClick={() => confirmPurchase()}>Finalizar Pedido</button>
+        <button disabled={!enabledFinish} onClick={() => confirmPurchase()}>Finalizar Pedido</button>
         <Link to="/home" className="button">Continuar Comprando</Link>
       </StyledMain>
     </Container>

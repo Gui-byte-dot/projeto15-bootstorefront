@@ -15,7 +15,7 @@ export default function Container({ children, isNotHome=false }) {
   const {token} = useContext(LoginContext);
   
   function logout() {
-    axios.post("http://localhost:5000/logout",[],{
+    axios.post("http://localhost:5000/logout",{},{
       headers:{
         Authorization: token
       }
