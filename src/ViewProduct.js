@@ -36,7 +36,7 @@ export default function ViewProduct (){
       navigate("/carrinho")
     }).catch((err) => {
       if(err?.response?.status === 400) {
-        alert("Produto já esta no carrinho");
+        alert("Produto Nao encontrado na nossa lista de produtos");
       }
       console.log(err)
     })

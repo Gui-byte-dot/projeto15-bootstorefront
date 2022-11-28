@@ -95,6 +95,7 @@ button, .button {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 }
 `
 const StyleCardProduct = styled.div`
