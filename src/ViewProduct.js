@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {useContext, useState} from "react";
 import home from "./assets/home.svg"
-import logout from "./assets/logout.svg"
 
 import {LoginContext} from "./contexts/AuthProvider.js";
 import Alert from './Alert.js';
@@ -61,14 +60,6 @@ export default function ViewProduct (){
         </div>
         <button onClick={() => confirmProductCart()} className="link">Colocar no carrinho</button>
       </StyledMain>
-        <Link to='/home'>
-          <div className="logo">
-            <img src={home} alt="logo" />
-          </div>
-        </Link>
-        <div className="carrinho">
-          <img src={logout} alt="carrinho de compras" />
-        </div>
     </Container>
   </>
   )
